@@ -14,23 +14,23 @@ public class TrasactionOperation extends EntityManagerTest {
 
     @Test
     public void removeObject() {
-        Product product = entityManager.find(Product.class, 1);
+        Product product = entityManager.find(Product.class, 3);
         
         entityManager.getTransaction().begin();
         entityManager.remove(product);
         entityManager.getTransaction().commit();
 
-        Product productVerify = entityManager.find(Product.class, 1);
+        Product productVerify = entityManager.find(Product.class, 3);
         Assert.assertNull(productVerify);
     }
 
     @Test
     public void insertObject() {
         Product product = Product.builder()
-                .id(2)
-                .name("PS5")
-                .description("Lindo!")
-                .price(new BigDecimal(5000)).build();
+                .id(6)
+                .name("PS4")
+                .description("Beautyfull!")
+                .price(new BigDecimal(3000)).build();
 
         entityManager.getTransaction().begin();
         entityManager.persist(product);
@@ -38,7 +38,7 @@ public class TrasactionOperation extends EntityManagerTest {
         entityManager.clear();
 
         Product productVerify = entityManager.find(Product.class, product.getId());
-        Assert.assertEquals("PS5", productVerify.getName());
+        Assert.assertEquals("PS4", productVerify.getName());
         assertNotNull(productVerify);
     }
 }
