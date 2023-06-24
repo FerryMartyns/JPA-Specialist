@@ -13,6 +13,18 @@ import br.com.rickferry.model.Product;
 public class TrasactionOperation extends EntityManagerTest {
 
     @Test
+    public void removeObject() {
+        Product product = entityManager.find(Product.class, 1);
+        
+        entityManager.getTransaction().begin();
+        entityManager.remove(product);
+        entityManager.getTransaction().commit();
+
+        Product productVerify = entityManager.find(Product.class, 1);
+        Assert.assertNull(productVerify);
+    }
+
+    @Test
     public void insertObject() {
         Product product = Product.builder()
                 .id(2)
