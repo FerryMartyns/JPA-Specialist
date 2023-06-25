@@ -1,16 +1,43 @@
 package br.com.rickferry.starter;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.math.BigDecimal;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.rickferry.EntityManagerTest;
 import br.com.rickferry.model.Product;
 
 public class TrasactionOperation extends EntityManagerTest {
+
+    @Test
+    public void findOne(){
+        Product product = entityManager.find(Product.class, 5);
+
+        Product productVerify = entityManager.find(Product.class, product.getId());
+
+        assertNotNull(productVerify);
+    }
+
+    @Test
+    public void updateObject(){
+        Product product = entityManager.find(Product.class, 5);
+
+        product.setName("Car");
+        product.setPrice(new BigDecimal(50000));
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(product);
+        entityManager.getTransaction().commit();
+        entityManager.clear();
+
+        Product productVerify = entityManager.find(Product.class, product.getId());
+
+        assertEquals("Car", productVerify.getName());
+    }
 
     @Test
     public void removeObject() {
@@ -21,7 +48,7 @@ public class TrasactionOperation extends EntityManagerTest {
         entityManager.getTransaction().commit();
 
         Product productVerify = entityManager.find(Product.class, 3);
-        Assert.assertNull(productVerify);
+        assertNull(productVerify);
     }
 
     @Test
@@ -38,7 +65,7 @@ public class TrasactionOperation extends EntityManagerTest {
         entityManager.clear();
 
         Product productVerify = entityManager.find(Product.class, product.getId());
-        Assert.assertEquals("PS4", productVerify.getName());
+        assertEquals("PS4", productVerify.getName());
         assertNotNull(productVerify);
     }
 }
