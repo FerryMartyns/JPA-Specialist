@@ -1,10 +1,8 @@
 package br.com.rickferry.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import br.com.rickferry.model.enums.ClientSex;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,13 +13,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
+public class Stock {
     
     @Id
     private Integer id;
     
-    @Column(name = "`NAME`")
-    private String name;
-
-    private ClientSex sexo;
+    private Integer productId;
+    private Integer amount;
 }
