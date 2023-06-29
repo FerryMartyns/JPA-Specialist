@@ -6,15 +6,17 @@ import static org.junit.Assert.assertNull;
 
 import java.math.BigDecimal;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.rickferry.EntityManagerTest;
+import br.com.rickferry.model.Client;
 import br.com.rickferry.model.Product;
 
 public class TrasactionOperation extends EntityManagerTest {
 
     @Test
-    public void findOne(){
+    public void findOne() {
         Product product = entityManager.find(Product.class, 5);
 
         Product productVerify = entityManager.find(Product.class, product.getId());
@@ -23,7 +25,7 @@ public class TrasactionOperation extends EntityManagerTest {
     }
 
     @Test
-    public void updateObject(){
+    public void updateObject() {
         Product product = entityManager.find(Product.class, 5);
 
         product.setName("Car");
@@ -42,7 +44,7 @@ public class TrasactionOperation extends EntityManagerTest {
     @Test
     public void removeObject() {
         Product product = entityManager.find(Product.class, 3);
-        
+
         entityManager.getTransaction().begin();
         entityManager.remove(product);
         entityManager.getTransaction().commit();
@@ -54,18 +56,18 @@ public class TrasactionOperation extends EntityManagerTest {
     @Test
     public void insertObject() {
         Product product = Product.builder()
-                .id(6)
                 .name("PS4")
                 .description("Beautyfull!")
-                .price(new BigDecimal(3000)).build();
+                .price(new BigDecimal(3000))
+                .build();
 
         entityManager.getTransaction().begin();
         entityManager.persist(product);
         entityManager.getTransaction().commit();
         entityManager.clear();
 
-        Product productVerify = entityManager.find(Product.class, product.getId());
-        assertEquals("PS4", productVerify.getName());
-        assertNotNull(productVerify);
+        Product verify = entityManager.find(Product.class, product.getId());
+        Assert.assertEquals("PS4", verify.getName());
+        assertNotNull(verify);
     }
 }

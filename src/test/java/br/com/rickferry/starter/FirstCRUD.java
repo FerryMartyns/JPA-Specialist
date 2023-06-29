@@ -9,11 +9,12 @@ import org.junit.Test;
 
 import br.com.rickferry.EntityManagerTest;
 import br.com.rickferry.model.Client;
+import br.com.rickferry.model.enums.ClientSex;
 
-public class FirstCRUD extends EntityManagerTest{
-    
+public class FirstCRUD extends EntityManagerTest {
+
     @Test
-    public void findOne(){
+    public void findOne() {
         Client client = entityManager.find(Client.class, 1);
 
         Client clientVerify = entityManager.find(Client.class, client.getId());
@@ -22,7 +23,7 @@ public class FirstCRUD extends EntityManagerTest{
     }
 
     @Test
-    public void updateObject(){
+    public void updateObject() {
         Client client = entityManager.find(Client.class, 2);
 
         client.setName("Jimy");
@@ -40,7 +41,7 @@ public class FirstCRUD extends EntityManagerTest{
     @Test
     public void removeObject() {
         Client client = entityManager.find(Client.class, 2);
-        
+
         entityManager.getTransaction().begin();
         entityManager.remove(client);
         entityManager.getTransaction().commit();
@@ -52,8 +53,9 @@ public class FirstCRUD extends EntityManagerTest{
     @Test
     public void insertObject() {
         Client client = Client.builder()
-                .id(3)
-                .name("Kalel").build();
+                .name("Kalel")
+                .sex(ClientSex.MASCULINE)
+                .build();
 
         entityManager.getTransaction().begin();
         entityManager.persist(client);
