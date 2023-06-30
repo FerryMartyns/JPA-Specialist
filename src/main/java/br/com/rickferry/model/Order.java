@@ -2,6 +2,7 @@ package br.com.rickferry.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -11,6 +12,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.rickferry.model.enums.OrderStatus;
@@ -27,26 +31,60 @@ import lombok.NoArgsConstructor;
 @Table(name = "`ORDER`")
 public class Order {
 
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     *
+     */
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    /**
+     *
+     */
+    @OneToMany(mappedBy = "order")
+    private List<OrderedItem> orderedItens;
+
+    /**
+     *
+     */
     @Column(name = "`ORDER_DATE`")
     private LocalDateTime orderDate;
 
+    /**
+     *
+     */
     @Column(name = "`CONCLUSION_DATE`")
     private LocalDateTime conclusionDate;
 
+    /**
+     *
+     */
     @Column(name = "`INVOICE_ID`")
     private Integer invoiceId;
 
+    /**
+     *
+     */
     @Column(name = "`STATUS`")
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    /**
+     *
+     */
     @Column(name = "`TOTAL`")
     private BigDecimal total;
 
+    /**
+     *
+     */
     @Embedded
     private OrderAddress orderAddress;
 }

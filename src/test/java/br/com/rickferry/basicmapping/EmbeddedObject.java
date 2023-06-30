@@ -13,20 +13,38 @@ import br.com.rickferry.model.enums.OrderStatus;
 
 public class EmbeddedObject extends EntityManagerTest {
 
+    /**
+     *
+     */
+    private static final Integer VALUE = 1000;
+
+    /**
+     *
+     */
     @Test
     public void embeddedObjectTest() {
-        OrderAddress orderAdress = OrderAddress.builder().city("SP").complement("House").neighborhood("Itaquera")
-                .number("999").publicPlace("Street").state("SP").zipCode("00000-000").build();
+        var orderAdress = OrderAddress.builder()
+                .city("SP")
+                .complement("House")
+                .neighborhood("Itaquera")
+                .number("999")
+                .publicPlace("Street")
+                .state("SP")
+                .zipCode("00000-000")
+                .build();
 
-        Order order = Order.builder().orderDate(LocalDateTime.now()).status(OrderStatus.WAITING)
-                .total(new BigDecimal(1000)).orderAddress(orderAdress).build();
+        var order = Order.builder()
+                .orderDate(LocalDateTime.now())
+                .status(OrderStatus.WAITING)
+                .total(new BigDecimal(VALUE))
+                .orderAddress(orderAdress).build();
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(order);
-        entityManager.getTransaction().commit();
-        entityManager.clear();
+        getEntityManager().getTransaction().begin();
+        getEntityManager().persist(order);
+        getEntityManager().getTransaction().commit();
+        getEntityManager().clear();
 
-        Order verify = entityManager.find(Order.class, order.getId());
+        Order verify = getEntityManager().find(Order.class, order.getId());
         Assert.assertNotNull(verify.getOrderAddress());
     }
 }

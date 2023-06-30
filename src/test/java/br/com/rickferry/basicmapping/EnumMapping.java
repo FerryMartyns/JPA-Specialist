@@ -11,6 +11,9 @@ import br.com.rickferry.model.enums.ClientSex;
 
 public class EnumMapping extends EntityManagerTest {
 
+    /**
+     *
+     */
     @Test
     public void enumTest() {
         Client client = Client.builder()
@@ -18,12 +21,12 @@ public class EnumMapping extends EntityManagerTest {
                                 .sex(ClientSex.MASCULINE)
                                 .build();
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(client);
-        entityManager.getTransaction().commit();
-        entityManager.clear();
+        getEntityManager().getTransaction().begin();
+        getEntityManager().persist(client);
+        getEntityManager().getTransaction().commit();
+        getEntityManager().clear();
 
-        Client verify = entityManager.find(Client.class, client.getId());
+        Client verify = getEntityManager().find(Client.class, client.getId());
         Assert.assertEquals("MASCULINE", valueOf(verify.getSex()));
     }
 }

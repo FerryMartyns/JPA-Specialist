@@ -23,15 +23,27 @@ import lombok.NoArgsConstructor;
 @Table(name = "ticket_payment")
 public class TicketPayment {
 
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     *
+     */
     @Column(name = "order_id")
     private Integer orderId;
 
+    /**
+     *
+     */
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
+    /**
+     *
+     */
     private Integer barcode;
 }

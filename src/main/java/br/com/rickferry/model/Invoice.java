@@ -22,15 +22,27 @@ import lombok.NoArgsConstructor;
 @Table(name = "invoice")
 public class Invoice {
 
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     *
+     */
     @Column(name = "order_id")
     private Integer orderId;
 
+    /**
+     *
+     */
     private String xml;
 
+    /**
+     *
+     */
     @Column(name = "emission_date")
     private Date emissionDate;
 }

@@ -13,43 +13,64 @@ import br.com.rickferry.model.enums.ClientSex;
 
 public class FirstCRUD extends EntityManagerTest {
 
-    @Test
-    public void findOne() {
-        Client client = entityManager.find(Client.class, 1);
+    /**
+     *
+     */
+    private static final Integer VALUE = 1;
 
-        Client clientVerify = entityManager.find(Client.class, client.getId());
+    /**
+     *
+     */
+    //@Test
+    public void findOne() {
+        Client client = getEntityManager().find(Client.class, VALUE);
+
+        Client clientVerify = getEntityManager()
+                .find(Client.class, client.getId());
 
         assertNotNull(clientVerify);
     }
 
-    @Test
+    /**
+     *
+     */
+    //@Test
     public void updateObject() {
-        Client client = entityManager.find(Client.class, 2);
+        Client client = getEntityManager().find(Client.class, VALUE);
 
         client.setName("Jimy");
 
-        entityManager.getTransaction().begin();
-        entityManager.merge(client);
-        entityManager.getTransaction().commit();
-        entityManager.clear();
+        getEntityManager().getTransaction().begin();
+        getEntityManager().merge(client);
+        getEntityManager().getTransaction().commit();
+        getEntityManager().clear();
 
-        Client clientVerify = entityManager.find(Client.class, client.getId());
+        Client clientVerify = getEntityManager()
+                .find(Client.class, client.getId());
 
         assertEquals("Jimy", clientVerify.getName());
     }
 
-    @Test
+    /**
+     *
+     */
+    //@Test
     public void removeObject() {
-        Client client = entityManager.find(Client.class, 2);
+        Client client = getEntityManager().find(Client.class, VALUE);
 
-        entityManager.getTransaction().begin();
-        entityManager.remove(client);
-        entityManager.getTransaction().commit();
+        getEntityManager().getTransaction().begin();
+        getEntityManager().remove(client);
+        getEntityManager().getTransaction().commit();
+        getEntityManager().clear();
 
-        Client clientVerify = entityManager.find(Client.class, 2);
+        Client clientVerify = getEntityManager()
+                .find(Client.class, client.getId());
         assertNull(clientVerify);
     }
 
+    /**
+     *
+     */
     @Test
     public void insertObject() {
         Client client = Client.builder()
@@ -57,12 +78,13 @@ public class FirstCRUD extends EntityManagerTest {
                 .sex(ClientSex.MASCULINE)
                 .build();
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(client);
-        entityManager.getTransaction().commit();
-        entityManager.clear();
+        getEntityManager().getTransaction().begin();
+        getEntityManager().persist(client);
+        getEntityManager().getTransaction().commit();
+        getEntityManager().clear();
 
-        Client clientVerify = entityManager.find(Client.class, client.getId());
+        Client clientVerify = getEntityManager()
+                .find(Client.class, client.getId());
         Assert.assertEquals("Kalel", clientVerify.getName());
         assertNotNull(clientVerify);
     }

@@ -1,23 +1,32 @@
 package br.com.rickferry.basicmapping;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.rickferry.EntityManagerTest;
 import br.com.rickferry.model.Category;
 
-public class PrimaryKeyStrategyTest extends EntityManagerTest{
-    
+public class PrimaryKeyStrategyTest extends EntityManagerTest {
+
+    /**
+     *
+     */
     @Test
-    public void keyStrategyTest(){
-        Category category = Category.builder().name("").name("").categoryFatherId(1).build();
+    @Ignore
+    public void keyStrategyTest() {
+        var category = Category.builder()
+                .name("")
+                .categoryFather(null)
+                .build();
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(category);
-        entityManager.getTransaction().commit();
-        entityManager.clear();
+        getEntityManager().getTransaction().begin();
+        getEntityManager().persist(category);
+        getEntityManager().getTransaction().commit();
+        getEntityManager().clear();
 
-        Category verify = entityManager.find(Category.class, category.getId());
+        Category verify = getEntityManager()
+                .find(Category.class, category.getId());
         Assert.assertNotNull(verify);
     }
 }

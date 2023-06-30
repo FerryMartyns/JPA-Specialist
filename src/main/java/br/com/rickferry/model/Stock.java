@@ -20,12 +20,21 @@ import lombok.NoArgsConstructor;
 @Table(name = "stock")
 public class Stock {
 
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     *
+     */
     @Column(name = "product_id")
     private Integer productId;
 
+    /**
+     *
+     */
     private Integer amount;
 }
