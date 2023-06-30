@@ -1,7 +1,6 @@
 package br.com.rickferry.basicmapping;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.rickferry.EntityManagerTest;
@@ -13,7 +12,6 @@ public class PrimaryKeyStrategyTest extends EntityManagerTest {
      *
      */
     @Test
-    @Ignore
     public void keyStrategyTest() {
         var category = Category.builder()
                 .name("")

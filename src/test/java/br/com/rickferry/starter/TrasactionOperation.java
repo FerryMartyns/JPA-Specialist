@@ -39,7 +39,6 @@ public class TrasactionOperation extends EntityManagerTest {
      *
      */
     @Test
-    @Ignore
     public void findOne() {
         Product product = getEntityManager().find(Product.class, VALUE_1);
 
@@ -53,7 +52,6 @@ public class TrasactionOperation extends EntityManagerTest {
      *
      */
     @Test
-    @Ignore
     public void updateObject() {
         Product product = getEntityManager().find(Product.class, VALUE_1);
 

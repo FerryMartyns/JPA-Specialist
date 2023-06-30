@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.rickferry.EntityManagerTest;
@@ -26,7 +25,6 @@ public class RelationshipsTest extends EntityManagerTest {
          *
          */
         @Test
-        @Ignore
         public void manyToOneTest() {
                 Client client = getEntityManager().find(Client.class, ID);
 
@@ -51,7 +49,6 @@ public class RelationshipsTest extends EntityManagerTest {
          *
          */
         @Test
-        @Ignore
         public void manyToOneOrderedItemTest() {
                 Client client = getEntityManager().find(Client.class, ID);
                 Product product = getEntityManager().find(Product.class, ID);
@@ -86,7 +83,6 @@ public class RelationshipsTest extends EntityManagerTest {
          *
          */
         @Test
-        @Ignore
         public void oneToManyTest() {
                 Client client = getEntityManager().find(Client.class, ID);
 
