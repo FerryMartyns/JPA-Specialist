@@ -18,7 +18,7 @@ public class RegistryQuery extends EntityManagerTest {
         Product product = getEntityManager().find(Product.class, 1);
 
         assertNotNull(product);
-        assertEquals("PS4", product.getName());
+        assertEquals("Kindle", product.getName());
     }
 
     /**
@@ -31,6 +31,6 @@ public class RegistryQuery extends EntityManagerTest {
 
         getEntityManager().refresh(product);
 
-        assertEquals("PS4", product.getName());
+        assertEquals("Kindle", product.getName());
     }
 }

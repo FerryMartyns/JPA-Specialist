@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.rickferry.model.enums.OrderStatus;
@@ -41,7 +42,19 @@ public class Order {
     /**
      *
      */
-    @ManyToOne
+    @OneToOne(mappedBy = "order")
+    private CardPayment cardPayment;
+
+    /**
+     *
+     */
+    @OneToOne(mappedBy = "order")
+    private Invoice invoice;
+
+    /**
+     *
+     */
+    @ManyToOne(optional = false)
     @JoinColumn(name = "client_id")
     private Client client;
 

@@ -6,8 +6,6 @@ import static org.junit.Assert.assertNull;
 
 import java.math.BigDecimal;
 
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.rickferry.EntityManagerTest;
@@ -73,15 +71,16 @@ public class TrasactionOperation extends EntityManagerTest {
      *
      */
     @Test
-    @Ignore
     public void removeObject() {
         Product product = getEntityManager().find(Product.class, VALUE_2);
 
         getEntityManager().getTransaction().begin();
         getEntityManager().remove(product);
         getEntityManager().getTransaction().commit();
+        getEntityManager().clear();
 
-        Product productVerify = getEntityManager().find(Product.class, VALUE_2);
+        Product productVerify = getEntityManager()
+                .find(Product.class, product.getId());
         assertNull(productVerify);
     }
 
@@ -103,7 +102,7 @@ public class TrasactionOperation extends EntityManagerTest {
 
         Product verify = getEntityManager()
                 .find(Product.class, product.getId());
-        Assert.assertEquals("PS4", verify.getName());
+        assertEquals("PS4", verify.getName());
         assertNotNull(verify);
     }
 }

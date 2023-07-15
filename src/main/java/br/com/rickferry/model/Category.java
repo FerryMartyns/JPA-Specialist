@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -42,12 +43,18 @@ public class Category {
      *
      */
     @ManyToOne
-    @JoinColumn(name = "category_father_id")
-    private Category categoryFather;
+    @JoinColumn(name = "parent_category_id")
+    private Category parentCategory;
 
     /**
      *
      */
-    @OneToMany(mappedBy = "categoryFather")
+    @OneToMany(mappedBy = "parentCategory")
     private List<Category> categories;
+
+    /**
+     *
+     */
+    @ManyToMany(mappedBy = "categories")
+    private List<Product> products;
 }

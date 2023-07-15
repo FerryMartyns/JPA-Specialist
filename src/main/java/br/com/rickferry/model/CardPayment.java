@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.rickferry.model.enums.PaymentStatus;
@@ -33,8 +35,9 @@ public class CardPayment {
     /**
      *
      */
-    @Column(name = "order_id")
-    private Integer orderId;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     /**
      *

@@ -15,7 +15,7 @@ public class PrimaryKeyStrategyTest extends EntityManagerTest {
     public void keyStrategyTest() {
         var category = Category.builder()
                 .name("")
-                .categoryFather(null)
+                .parentCategory(null)
                 .build();
 
         getEntityManager().getTransaction().begin();
